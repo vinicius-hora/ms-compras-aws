@@ -6,8 +6,17 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
-import javax.xml.crypto.Data;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import java.math.BigDecimal;
+import java.util.Date;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,13 +24,26 @@ import java.math.BigDecimal;
 @Setter
 @Builder
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+@Entity(name = "tb_pedido")
 public class Pedido {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotBlank
     private String nome;
+    @NotNull
+    @Min(1)
     private String produto;
+    @NotNull
+    @Min(1)
     private BigDecimal valor;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private Data dataCompra;
+    @NotNull
+    @JsonFormat(pattern = "YYYY-mm-dd")
+    private Date dataCompra;
+    @NotBlank
     private String cpfCliente;
+    @NotBlank
     private String cep;
 }
