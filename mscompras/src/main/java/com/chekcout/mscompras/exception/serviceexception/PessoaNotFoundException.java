@@ -10,4 +10,5 @@ public class PessoaNotFoundException extends EntidadeNaoEncontradaException {
         this(String.format("Não existe uma pessoa com o id: %s na base de dados!", id));
     }
 
+
 }
