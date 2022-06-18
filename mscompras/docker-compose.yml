@@ -1,6 +1,16 @@
 version: '3.0'
 
 services:
+  backend:
+    container_name: backend
+    restart: always
+    build: .
+    ports:
+      - "4000:4100"
+    links:
+      - rabbitmq
+    networks:
+      hosts:
   rabbitmq:
     image: rabbitmq:3.10-management
     ports:
@@ -9,4 +19,8 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=admin
-      
+    networks:
+      hosts:
+
+networks:
+  hosts:

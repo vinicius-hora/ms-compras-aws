@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/micro-servicos-compras.iml" filepath="$PROJECT_DIR$/.idea/micro-servicos-compras.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mscompras/mscompras.iml" filepath="$PROJECT_DIR$/mscompras/mscompras.iml" />
+      <module fileurl="file://$PROJECT_DIR$/workercompras/workercompras.iml" filepath="$PROJECT_DIR$/workercompras/workercompras.iml" />
+    </modules>
+  </component>
+</project>
