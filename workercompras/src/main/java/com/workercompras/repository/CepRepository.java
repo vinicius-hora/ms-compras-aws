@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(name = "viacep", url = "${viacep}", fallback = HystrixClientFallback.class)
 public interface CepRepository {
+
+
     @GetMapping("/{cep}/json/")
     Endereco buscarPorCep(@PathVariable ("cep") String cep);
 }

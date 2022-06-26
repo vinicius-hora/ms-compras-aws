@@ -50,4 +50,7 @@ public class Pedido implements Serializable {
     private String cpfCliente;
     @NotBlank
     private String cep;
+
+    @NotBlank
+    private String email;
 }
