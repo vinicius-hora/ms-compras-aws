@@ -1,4 +1,4 @@
-package com.workercompras.comsumer;
+package com.workercompras.service.comsumer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.workercompras.model.Pedido;
@@ -25,7 +25,7 @@ public class Consumer {
     public void consumer(@Payload Message payload) throws IOException {
         var pedido = objectMapper.readValue(payload.getBody(), Pedido.class);
         log.info("Pedido recebido: {}", pedido);
-//        emailService.notificarCliente(pedido.getEmail());
+        emailService.notificarCliente(pedido);
     }
 
 

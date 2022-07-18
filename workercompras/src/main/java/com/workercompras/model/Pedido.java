@@ -40,6 +40,8 @@ public class Pedido implements Serializable {
 
     private String email;
 
+    private Cartao cartao;
+
 
 
 
