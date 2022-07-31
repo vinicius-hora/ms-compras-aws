@@ -3,6 +3,7 @@ package com.workercompras.service.producer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.workercompras.model.Cartao;
 import com.workercompras.model.Pedido;
+import com.workercompras.service.CartaoService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -25,12 +26,14 @@ public class PedidoProducer {
 
     private final ObjectMapper mapper;
 
+    private final CartaoService cartaoService;
+
     @SneakyThrows
     @PostMapping
     public void enviarPedido(Pedido pedido){
         pedido.setCartao(Cartao.builder().
-                numero("000 000 000 000").
-                limiteDisponivel(new BigDecimal(1000))
+                numero(cartaoService.gerarCartao()).
+                limiteDisponivel(cartaoService.gerarLimite())
                         .build());
         rabbitTemplate.convertAndSend(queue.getName(), mapper.writeValueAsString(pedido));
         log.info("pedido montado com sucesso em pworker de compras - pedido producer: {}", mapper.writeValueAsString(pedido));
