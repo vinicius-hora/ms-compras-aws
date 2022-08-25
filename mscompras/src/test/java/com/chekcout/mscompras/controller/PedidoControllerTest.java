@@ -5,15 +5,18 @@ import com.chekcout.mscompras.exception.serviceexception.EntidadeNaoEncontradaEx
 import com.chekcout.mscompras.exception.serviceexception.NegocioException;
 import com.chekcout.mscompras.model.Pedido;
 import com.chekcout.mscompras.service.PedidoService;
+import com.chekcout.mscompras.service.rabbit.Producer;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -43,6 +46,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     @Autowired
     private ObjectMapper mapper;
 
+    @MockBean
+    private Producer producer;
+
     private static final String ROTA_PEDIDO = "/pedido";
 
     @Test
@@ -51,6 +57,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
         var pedidoBody = dadosMock.getPedido();
         var id = 2L;
+
+        Mockito.doNothing().when(producer).enviarPedido(Mockito.any(Pedido.class));
 
         mockMvc.perform(post(ROTA_PEDIDO + "/")
                 .content(mapper.writeValueAsString(pedidoBody))
