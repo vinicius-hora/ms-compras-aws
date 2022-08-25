@@ -1,5 +1,6 @@
 package com.chekcout.mscompras.service;
 
+import com.chekcout.mscompras.exception.serviceexception.EntidadeNaoEncontradaException;
 import com.chekcout.mscompras.exception.serviceexception.NegocioException;
 import com.chekcout.mscompras.model.Pedido;
 import com.chekcout.mscompras.repository.PedidoRepository;
@@ -24,7 +25,7 @@ public class PedidoService {
 
     public Pedido buscarOuFalharPorId(Long id){
         return pedidoRepository.findById(id)
-                .orElseThrow(() -> new NegocioException("O pedido de id: " + id + " não existe na base de dados"));
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("O pedido de id: " + id + " não existe na base de dados"));
 
     }
 
