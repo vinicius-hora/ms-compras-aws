@@ -1,6 +1,6 @@
 package com.worker.validador.service;
 
-import com.worker.validador.model.Pedido;
+
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
