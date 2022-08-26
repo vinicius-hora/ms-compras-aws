@@ -53,4 +53,26 @@ jobs:
           name: artifact
           # A file, directory or wildcard pattern that describes what to upload
           path: ./mscompras/target/app.jar
+  # deploy:
+  #   needs: build
+  #   name: Deploy on aws 
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: download jar
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: artifact
+  #     - name: Deploy to EB
+  #       uses: einaregilsson/beanstalk-deploy@v20
+  #       with:
+  #         aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #         wait_for_environment_recovery: 120
+  #         use_existing_version_if_available: true
+  #         application_name: MyApplicationName
+  #         environment_name: MyApplication-Environment
+  #         version_label: latest-${{github.SHA}}
+  #         region: us-west-2
+  #         deployment_package: app.jar
+
 
